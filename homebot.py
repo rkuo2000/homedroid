@@ -4,30 +4,28 @@
 #
 # History:
 # v0.1 create PersistentMenu
+# v0.2 revise PersistentMenu for Room selection
+#      revise QuickReplies for Light selection
 #
 import os
 import requests
 from sys import argv
 from bottle import Bottle, request
-from selenium import webdriver
+#from selenium import webdriver
 from bs4 import BeautifulSoup
 import json
 import re
 import paho.mqtt.publish as publish
 
-FB_PAGE_TOKEN = "xxxxxxxxxxxxxxxxxxxx"
-FB_VERIFY_TOKEN = "verify me"
+FB_PAGE_TOKEN = "EAANFvjT1XoYBAG"
+B_VERIFY_TOKEN = "verify me"
 FB_GRAPH_API = 'https://graph.facebook.com/v2.10/me/messages?'
 
 HOST_ADDR = '123.195.50.57'
 HOST_PORT = 1883
 
 # global variables
-FrontDoorState = 0
-LightsState = 0
-TVsetState = 0
-StereoState = 0
-XmasState = 0
+room_select = 'LIVINGROOM'
 
 # Setup Bottle Server
 app = Bottle()
@@ -61,8 +59,7 @@ def messenger_post():
                     try:
                         text  = message['text']
                         print(sender,text)
-                        sendMessage(sender,text)
-                        sendQuickReplies_Home(sender)						
+                        sendMessage(sender,text)						
                     except KeyError:
                         print('>>>KeyError=message-text!')
 #-------------------QuickReplies Payload----------------------------------------
@@ -70,16 +67,6 @@ def messenger_post():
                         quick_reply= message['quick_reply']
                         payload=quick_reply['payload']
                         print(sender,payload)
-                        if payload=='USER_DEFINED_PAYLOAD_LIVINGROOM':
-                            sendQuickReplies_LivingRoom(sender)
-                        elif payload=='USER_DEFINED_PAYLOAD_FAMILYROOM':
-                            sendMessage(sender,'Under Construction!!!')
-                        elif payload=='USER_DEFINED_PAYLOAD_KITCHEN':
-                            sendMessage(sender,'Under Construction!!!')
-                        elif payload=='USER_DEFINED_PAYLOAD_MASTERROOM':
-                            sendMessage(sender,'Under Construction!!!')							
-                        elif payload=='USER_DEFINED_PAYLOAD_BEDROOM':
-                            sendMessage(sender,'Under Construction!!!')
 #-------------------QuickReplies Payload for LivingRoom--------------------------
                         if payload=='USER_DEFINED_PAYLOAD_LIVINGROOM_DOOR':
                             payload='turn on Door light'
@@ -105,6 +92,17 @@ def messenger_post():
                     postback= messages[0]['postback']
                     payload = messages[0]['postback']['payload']
                     print(sender,payload)
+                    if payload=='USER_DEFINED_PAYLOAD_LIVINGROOM':
+                        room='LIVINGROOM'
+                        sendQuickReplies_LivingRoom(sender)
+                    elif payload=='USER_DEFINED_PAYLOAD_FAMILYROOM':
+                        room='FAMILYROOM'
+                    elif payload=='USER_DEFINED_PAYLOAD_KITCHEN':
+                        room='KITCHEN'
+                    elif payload=='USER_DEFINED_PAYLOAD_MASTERROOM':
+                        room='MASTEROOM'							
+                    elif payload=='USER_DEFINED_PAYLOAD_BEDROOM':
+                        room='BEDROOM'				
                     if payload=='GET_STARTED_PAYLOAD': 
                         sendMessage(sender, 'Hi, I am HomeBot.')
                     if payload=='USER_DEFINED_PAYLOAD_SMARTHOME':
@@ -132,43 +130,6 @@ def sendMessage(sender, text):
 def sendMQTT_pub(topic, payload):
     publish.single(topic, payload, qos=1, hostname=HOST_ADDR, port=HOST_PORT)
 	
-def sendQuickReplies_Home(sender):
-    data = {
-        'recipient': {'id':sender},
-        'message': {
-            "text":"Select:",
-            "quick_replies":[
-            {
-                "content_type":"text",
-                "title":"LivingRoom",
-                "payload":"USER_DEFINED_PAYLOAD_LIVINGROOM"
-            },
-            {
-                "content_type":"text",
-                "title":"FamilyRoom",
-                "payload":"USER_DEFINED_PAYLOAD_FAMILYROOM"
-            },
-            {
-                "content_type":"text",
-                "title":"Kitchen",
-                "payload":"USER_DEFINED_PAYLOAD_KITCHEN"
-            },
-            {
-                "content_type":"text",
-                "title":"MasterRoom",
-                "payload":"USER_DEFINED_PAYLOAD_MASTERROOM"
-            },
-            {
-                "content_type":"text",
-                "title":"BedRoom",
-                "payload":"USER_DEFINED_PAYLOAD_BEDROOM"
-            }			
-            ]
-        }
-    }
-    qs = 'access_token=' + FB_PAGE_TOKEN
-    resp = requests.post(FB_GRAPH_API + qs, json=data)
-    return resp.content
 	
 def sendQuickReplies_LivingRoom(sender):
     data = {

@@ -5,9 +5,35 @@ curl -X POST -H "Content-Type: application/json" -d '{
       "composer_input_disabled":false,
       "call_to_actions":[
         {
-          "type":"postback",
           "title":"SMART HOME",
-          "payload":"USER_DEFINED_PAYLOAD_HOME"
+          "type":"nested",
+          "call_to_actions":[
+			{
+				"type":"postback",
+				"title":"LivingRoom",
+				"payload":"USER_DEFINED_PAYLOAD_LIVINGROOM"
+			},
+			{
+				"type":"postback",
+				"title":"FamilyRoom",
+				"payload":"USER_DEFINED_PAYLOAD_FAMILYROOM"
+			},
+			{
+				"type":"postback",
+				"title":"KitchenRoom",
+				"payload":"USER_DEFINED_PAYLOAD_KITCHEN"
+			},
+			{
+				"type":"postback",
+				"title":"MasterRoom",
+				"payload":"USER_DEFINED_PAYLOAD_MASTERROOM"
+			},
+			{
+				"type":"postback",
+				"title":"BedRoom",
+				"payload":"USER_DEFINED_PAYLOAD_BEDROOM"
+			}
+		  ]          
         },
         {
           "type":"postback",
@@ -17,4 +43,4 @@ curl -X POST -H "Content-Type: application/json" -d '{
       ]
     }
   ]
-}' "https://graph.facebook.com/v2.10/me/messenger_profile?access_token=xxxxxxxxxxxxxxxxxxxxxxxxx"
+}' "https://graph.facebook.com/v2.10/me/messenger_profile?access_token=EAANFvjT1"
