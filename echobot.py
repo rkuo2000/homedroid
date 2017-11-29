@@ -6,12 +6,8 @@ import os
 import requests
 from sys import argv
 from bottle import Bottle, request
-from selenium import webdriver
-from bs4 import BeautifulSoup
 import json
 import re
-from gtts_token import gtts_token
-import MySQLdb
 
 FB_PAGE_TOKEN = ""
 FB_VERIFY_TOKEN = "verify me"
