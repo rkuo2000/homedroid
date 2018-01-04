@@ -43,15 +43,18 @@ void setup()
 
 void loop()
 { 
-  //Serial.print(sensor.readRangeContinuousMillimeters());
+  // VL53L0X infrared ranger
+  /*
+  Serial.print(sensor.readRangeContinuousMillimeters());
   distance = sensor.readRangeContinuousMillimeters();
   if (distance<50) 
   { 
     turnRight(); delay(100);
     forward();   delay(100);
-  }
-  //if (sensor.timeoutOccurred()) { Serial.print(" TIMEOUT"); }
-  //Serial.println();
+   }
+  if (sensor.timeoutOccurred()) { Serial.print(" TIMEOUT"); }
+  Serial.println();
+  */
    
    while (Serial.available()) {
     char inChar = (char)Serial.read();
