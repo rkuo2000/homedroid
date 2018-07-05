@@ -5,7 +5,11 @@
 //
 // Board       : Nu-LB-NUC140
 // MCU         : NUC140VE3CN (LQFP100)
-// UART0       : baudrate=115200, databit=8, stopbit=1, paritybit=0, flowcontrol=None
+// USB-to-UART : CP2012 (to PC USB)
+
+// Connections : 
+// UART0-TX to CP2012 USB-to-UART RX
+// UART0-RX to CP2012 USB-to-UART TX
 
 #include <stdio.h>
 #include <math.h>
