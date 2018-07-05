@@ -1,5 +1,5 @@
 //
-// uart0_to_comport : UART0 RX recieve and display Text
+// uart2com    : UART0 RX recieve and display Text
 //             : UART0-RX receive 8-bytes and display text
 //             : UART0-TX transmit "data = 00" (looping from 00 to 09)
 //
