@@ -4,7 +4,7 @@
 linkit7688duo_readtty.py - reading /dev/ttyS0, serial output from ATmega32u4 (arduino) <br />
 linkit7688duo_gpio_motor.py - test gpio control DC motors (L298N/LS9110S)<br />
 linkit7688duo_stop_motor.py - gpio stop DC motors<br />
-linkit7688duo_imu.py - reading IMU azumith (yaw)<br />
+linkit7688duo_imu.py - reading IMU azimuth (yaw)<br />
 linkit7688duo_imu_motor.py - gpio spin DC motor and read IMU yaw angle<br />
 
 ## fbchat (for FB Messenger)
