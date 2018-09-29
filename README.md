@@ -1,6 +1,7 @@
 # Homebot sample codes
 
-## linkit7688duo for home robot
+## linkit7688 duo
+linkit7688_robot_cat.py - randomly play meow sounds(mp3) on linkit7688 with Breakout (audio DAC) <br />
 linkit7688duo_readtty.py - reading /dev/ttyS0, serial output from ATmega32u4 (arduino) <br />
 linkit7688duo_gpio_motor.py - test gpio control DC motors (L298N/LS9110S)<br />
 linkit7688duo_stop_motor.py - gpio stop DC motors<br />
