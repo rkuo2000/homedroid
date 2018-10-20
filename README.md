@@ -15,9 +15,9 @@ fbchat_fetchid.py - list all FB friend's id <br />
 fbchat_send.py - send text, emoji, local image, remote image
 
 ## Text-To-Speech 
-`gtts-cli 'hello' --output hello.mp3`
-`python3 gTTS.py`
-`python3 gttsx3.py`
+`gtts-cli 'hello' --output hello.mp3`<br />
+`python3 gTTS.py`<br />
+`python3 gttsx3.py`<br />
 
 ## parse KML (Google Earth pro as Mission Planner)
 `python3 parse_kml.py test.kml`
