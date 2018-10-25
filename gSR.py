@@ -1,4 +1,5 @@
 ### $pip3 install SpeechRecognition
+### $pip3 install PyAudio
 import speech_recognition as sr
 
 r= sr.Recognizer()
