@@ -2,9 +2,12 @@
 ### $pip3 install PyAudio
 import speech_recognition as sr
 
+sample_rate = 48000
+chunk_size = 1024
+
 r= sr.Recognizer()
 
-with sr.Microphone() as source:
+with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
 #    r.adjust_for_ambient_noise(source)
     print("Speak:")
     audio = r.listen(source)i
