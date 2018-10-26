@@ -18,6 +18,8 @@ fbchat_send.py - send text, emoji, local image, remote image
 `gtts-cli 'hello' --output hello.mp3`<br />
 `python3 gTTS.py`<br />
 `python3 gttsx3.py`<br />
+`python3 gSR.py`<br />
+`python3 gSTT.py en fr`<br />
 
 ## parse KML (Google Earth pro as Mission Planner)
 `python3 parse_kml.py test.kml`
