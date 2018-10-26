@@ -1,10 +1,12 @@
 ### $pip3 install SpeechRecognition
 ### $pip3 install PyAudio
 import speech_recognition as sr
+import sys
 
 sample_rate = 48000
 chunk_size = 512
 
+sl = sys.argv[1]
 r= sr.Recognizer()
 
 with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
@@ -13,7 +15,7 @@ with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
     audio = r.listen(source)
     print("Processing...")
     try:
-        text = r.recognize_google(audio)
+        text = r.recognize_google(audio, language=sl)
         print("You said:", text)
     except sr.UnknownValueError:
         print("Could not understand audio!")
