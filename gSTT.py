@@ -6,10 +6,11 @@ import sys
 import os
 
 sl = 'en' # source language
-tl = 'zh-TW' # target language
+tl = 'fr' # target language
+#tl = 'zh-TW' 
 
 sample_rate = 48000
-chunk_size = 512
+chunk_size = 1024
 r= sr.Recognizer()
 
 def gTranslate(text,sl,tl):
@@ -36,8 +37,9 @@ with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
         ttext = gTranslate(text,sl,tl)
         tts=gTTS(ttext, lang=tl)
         tts.save('gTTS.mp3')
-        #os.system('madplay gTTS.mp3')
-        os.system('vlc gTTS.mp3')
+        #os.system('madplay gTTS.mp3') # mp3 player on RPi3
+        #os.system('afplay gTTS.mp3')  # mp3 player on Mac OS
+        os.system('vlc gTTS.mp3')      # mp3 player on Windows
     except sr.UnknownValueError:
         print("Could not understand audio!")
     except sr.RequestError as e:
