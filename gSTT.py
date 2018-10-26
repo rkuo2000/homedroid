@@ -5,9 +5,10 @@ import urllib.request
 import sys
 import os
 
-sl = 'en' # source language
-tl = 'fr' # target language
-#tl = 'zh-TW' 
+#sl = 'en' # source language
+#tl = 'fr' # target language (zh-TW)
+sl = sys.argv[1] # source language
+tl = sys.argv[2] # target language
 
 sample_rate = 48000
 chunk_size = 1024
@@ -17,7 +18,6 @@ def gTranslate(text,sl,tl):
     btext = text.encode('utf-8')
     btext = str(btext).replace(" ","%20").replace("\\x","%")
     text = str(btext)[2:-1]
-    print('Translate>',text)
     url="https://translate.google.com/m?hl=%s&sl=%s&q=%s" % (tl, sl, text)
     C_agent = {'User-Agent': "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.165063 Safari/537.36 AppEngine-Google."}
     flag = 'class="t0">'
@@ -33,8 +33,9 @@ with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
     audio = r.listen(source)
     try:
         text = r.recognize_google(audio)
-        print("You said:", text)		
+        print("You saidi :", text)		
         ttext = gTranslate(text,sl,tl)
+        print("Translated:", ttext)
         tts=gTTS(ttext, lang=tl)
         tts.save('gTTS.mp3')
         #os.system('madplay gTTS.mp3') # mp3 player on RPi3
