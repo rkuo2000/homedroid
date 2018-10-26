@@ -14,11 +14,10 @@ fbchat_echobot.py - messenger auto echo to message <br />
 fbchat_fetchid.py - list all FB friend's id <br />
 fbchat_send.py - send text, emoji, local image, remote image
 
-## Text-To-Speech 
-`python3 gTTS.py`<br />
-`python3 gttsx3.py`<br />
-`python3 gSR.py en`<br />
-`python3 gSTT.py en zh-TW`<br />
+## Speech 
+`python3 gTTS.py` - Text-To-Speech (output gTTS.mp3)<br />
+`python3 gSR.py en` - Speech Recognition<br />
+`python3 gSTT.py en zh-TW` - Speech Translation<br />
 
 ## parse KML (Google Earth pro as Mission Planner)
 `python3 parse_kml.py test.kml`
