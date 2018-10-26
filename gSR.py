@@ -3,7 +3,7 @@
 import speech_recognition as sr
 
 sample_rate = 48000
-chunk_size = 1024
+chunk_size = 512
 
 r= sr.Recognizer()
 
