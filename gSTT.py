@@ -8,6 +8,8 @@ import os
 sl = 'en' # source language
 tl = 'fr' # target language
 
+sample_rate = 48000
+chunk_size = 1024
 r= sr.Recognizer()
 
 def gTranslate(text,sl,tl):
@@ -24,7 +26,7 @@ def gTranslate(text,sl,tl):
     result = result.split("<")[0]
     return result
 
-with sr.Microphone() as source:
+with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
 #    r.adjust_for_ambient_noise(source)
     print("Speak:")
     audio = r.listen(source)
