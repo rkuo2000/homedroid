@@ -6,10 +6,10 @@ import sys
 import os
 
 sl = 'en' # source language
-tl = 'fr' # target language
+tl = 'zh-TW' # target language
 
 sample_rate = 48000
-chunk_size = 1024
+chunk_size = 512
 r= sr.Recognizer()
 
 def gTranslate(text,sl,tl):
@@ -34,8 +34,9 @@ with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
         text = r.recognize_google(audio)
         print("You said:", text)		
         ttext = gTranslate(text,sl,tl)
-        tts=gTTS(ttext, lang='fr')
+        tts=gTTS(ttext, lang=tl)
         tts.save('gTTS.mp3')
+        #os.system('madplay gTTS.mp3')
         os.system('vlc gTTS.mp3')
     except sr.UnknownValueError:
         print("Could not understand audio!")
