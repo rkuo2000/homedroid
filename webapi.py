@@ -1,9 +1,8 @@
-from sys import argv
-from bottle import Bottle, request
-import socket
-
 # Web API
+from bottle import Bottle, request
+
 app = Bottle()
+
 @app.get('/hello')
 def hello():
     return "Hello World!"
