@@ -17,7 +17,8 @@ fbchat_send.py - send text, emoji, local image, remote image
 ## Speech 
 `python3 gTTS.py` - Text-To-Speech (output gTTS.mp3)<br />
 `python3 gSR.py en` - Speech Recognition<br />
-`python3 gSTT.py en zh-TW` - Speech Translation<br />
+`python3 gSTT.py en zh-TW` - Speech Translation (run once)<br />
+`python3 gTranslate.py en zh-TW` - Speech Translation (loop with greeting)<br />
 
 ## parse KML (Google Earth pro as Mission Planner)
 `python3 parse_kml.py test.kml`
