@@ -28,7 +28,7 @@ def gTranslate(text,sl,tl):
     return result
 
 with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
-#    r.adjust_for_ambient_noise(source)
+    r.adjust_for_ambient_noise(source)
     print("Speak:")
     audio = r.listen(source)
     try:
