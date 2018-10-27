@@ -8,8 +8,8 @@ import random
 from fbchat import Client
 from fbchat.models import *
 
-fb_account = 'akuo1997@yahoo.com'
-fb_passwd = 'ariana123'
+fb_account = 'your_email'
+fb_passwd = 'your_passwd'
 
 #sl = 'en' # source language
 #tl = 'fr' # target language
