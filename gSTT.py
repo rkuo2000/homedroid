@@ -4,17 +4,39 @@ import requests
 import urllib.request
 import sys
 import os
+import random
 
 #sl = 'en' # source language
-#tl = 'fr' # target language (zh-TW)
-sl = sys.argv[1] # source language
-tl = sys.argv[2] # target language
+#tl = 'fr' # target language
+sl = sys.argv[1]
+tl = sys.argv[2]
 
 sample_rate = 48000
 chunk_size = 1024
 r= sr.Recognizer()
 
-def gTranslate(text,sl,tl):
+def text2speech(text,tl):
+    tts=gTTS(text, lang=tl)
+    tts.save('gTTS.mp3')
+    #os.system('madplay gTTS.mp3') # RPi3
+    #os.system('vlc gTTS.mp3')     # PC
+    os.system('afplay gTTS.mp3')   # MAC
+    
+def speech2text():
+    with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
+        r.adjust_for_ambient_noise(source)
+        print("Speak:")
+        audio = r.listen(source)
+        try:
+            text = r.recognize_google(audio, language=sl)
+            print("You said  :", text)		
+            return text
+        except sr.UnknownValueError:
+            print("Could not understand audio!")
+        except sr.RequestError as e:
+            print("Could not request results; {0}".format(e))
+
+def translate(text,sl,tl):
     btext = text.encode('utf-8')
     btext = str(btext).replace(" ","%20").replace("\\x","%")
     text = str(btext)[2:-1]
@@ -25,23 +47,10 @@ def gTranslate(text,sl,tl):
     page = str(urllib.request.urlopen(request).read().decode(sys.getfilesystemencoding()))
     result = page[page.find(flag) + len(flag):]
     result = result.split("<")[0]
+    print("Translated:", result)
     return result
 
-with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
-    r.adjust_for_ambient_noise(source)
-    print("Speak:")
-    audio = r.listen(source)
-    try:
-        text = r.recognize_google(audio)
-        print("You saidi :", text)		
-        ttext = gTranslate(text,sl,tl)
-        print("Translated:", ttext)
-        tts=gTTS(ttext, lang=tl)
-        tts.save('gTTS.mp3')
-        #os.system('madplay gTTS.mp3') # mp3 player on RPi3
-        #os.system('afplay gTTS.mp3')  # mp3 player on Mac OS
-        os.system('vlc gTTS.mp3')      # mp3 player on Windows
-    except sr.UnknownValueError:
-        print("Could not understand audio!")
-    except sr.RequestError as e:
-        print("Could not request results; {0}".format(e))
+# Main Program - Speech Translation
+text  = speech2text()
+ttext = translate(text,sl,tl)
+text2speech(ttext,tl)
