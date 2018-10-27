@@ -5,11 +5,11 @@ import urllib.request
 import sys
 import os
 import random
-from fbchat import Client
-from fbchat.models import *
+#from fbchat import Client
+#from fbchat.models import *
 
-fb_account = 'your_email'
-fb_passwd = 'your_passwd'
+#fb_account = 'your_email'
+#fb_passwd = 'your_passwd'
 
 #sl = 'en' # source language
 #tl = 'fr' # target language
@@ -63,8 +63,8 @@ def translate(text,sl,tl):
     print("Translated:", result)
     return result
 
-def fb_send(text):
-    client.send(Message(text=text),thread_id=client.uid, thread_type=ThreadType.USER)    
+#def fb_send(text):
+#    client.send(Message(text=text),thread_id=client.uid, thread_type=ThreadType.USER)    
 
 # Main Program
 print("--------------------------------------")
@@ -78,12 +78,12 @@ while True:
     os.system('afplay mp3/'+greeting[t][i])   # MAC
     # Speech to Text
     text  = speech2text()
-    fb_send(text)
+    #fb_send(text)
     if text is not None:
         ttext = translate(text,sl,tl)
-        fb_send(ttext)
+        #fb_send(ttext)
         text2speech(ttext,tl)
     if text=="have a good day":
         break
     print("--------------------------------------")
-client.logout()
+#client.logout()
