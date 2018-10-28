@@ -12,8 +12,8 @@ from fbchat.models import *
 #tl = 'fr' # target language
 sl = sys.argv[1]
 tl = sys.argv[2]
-fb_account = 'akuo1997@yahoo.com'
-fb_passwd =  'arinan123'
+fb_account = sys.argv[3] # 'your_email'
+fb_passwd =  sys.argv[4] # 'your_passwd'
 
 sample_rate = 48000
 chunk_size = 512
