@@ -15,18 +15,12 @@ sample_rate = 48000
 chunk_size = 512
 r= sr.Recognizer()
 
-greeting =[]
-tone =['tone0.mp3','tone1.mp3','tone2.mp3','tone3.mp3','tone4.mp3']
-vocal=['vocal0.mp3','vocal1.mp3','vocal2.mp3','vocal3.mp3','vocal4.mp3','vocal5.mp3','vocal6.mp3']
-greeting.append(tone)
-greeting.append(vocal)
-
 def text2speech(text,tl):
     tts=gTTS(text, lang=tl)
     tts.save('gTTS.mp3')
     #os.system('madplay gTTS.mp3') # RPi3
-    #os.system('vlc gTTS.mp3')     # PC
-    os.system('afplay gTTS.mp3')   # MAC
+    os.system('cmdmp3win gTTS.mp3')     # PC
+    #os.system('afplay gTTS.mp3')   # MAC
     
 def speech2text():
     with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
@@ -60,14 +54,7 @@ def translate(text,sl,tl):
 
 # Main Program
 print("--------------------------------------")
-client = Client(fb_account, fb_passwd)
-t=1
 while True:
-    # Greeting
-    i = random.randint(0,len(greeting[t])-1)
-    #os.system('madplay mp3/'+greeting[t][i]) # RPi3
-    #os.system('vlc mp3/'+greeting[t][i]))    # PC
-    os.system('afplay mp3/'+greeting[t][i])   # MAC
     # Speech to Text
     text  = speech2text()
     if text is not None:
