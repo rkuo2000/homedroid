@@ -19,12 +19,6 @@ sample_rate = 48000
 chunk_size = 512
 r= sr.Recognizer()
 
-greeting =[]
-tone =['tone0.mp3','tone1.mp3','tone2.mp3','tone3.mp3','tone4.mp3']
-vocal=['vocal0.mp3','vocal1.mp3','vocal2.mp3','vocal3.mp3','vocal4.mp3','vocal5.mp3','vocal6.mp3']
-greeting.append(tone)
-greeting.append(vocal)
-
 def text2speech(text,tl):
     tts=gTTS(text, lang=tl)
     tts.save('gTTS.mp3')
@@ -74,9 +68,8 @@ def greet(t):
 # Main Program
 client = Client(fb_account, fb_passwd)
 print("--------------------------------------")
-t=1
+
 while True:
-    greet(t)
     # Speech to Text
     text  = speech2text()
     fb_send(text)
