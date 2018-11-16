@@ -23,7 +23,7 @@ def text2speech(text,tl):
     tts=gTTS(text, lang=tl)
     tts.save('gTTS.mp3')
     #os.system('madplay gTTS.mp3') # RPi3
-    #os.system('cmdmp3win gTTS.mp3')     # PC
+    #os.system('cmdmp3 gTTS.mp3')     # PC
     os.system('afplay gTTS.mp3')   # MAC
     
 def speech2text():
