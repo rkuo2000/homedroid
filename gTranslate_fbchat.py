@@ -29,7 +29,7 @@ def text2speech(text,tl):
     tts=gTTS(text, lang=tl)
     tts.save('gTTS.mp3')
     #os.system('madplay gTTS.mp3') # RPi3
-    #os.system('vlc gTTS.mp3')     # PC
+    #os.system('cmdmp3win gTTS.mp3')     # PC
     os.system('afplay gTTS.mp3')   # MAC
     
 def speech2text():
@@ -68,7 +68,7 @@ def fb_send(text):
 def greet(t):
     i = random.randint(0,len(greeting[t])-1)
     #os.system('madplay mp3/'+greeting[t][i]) # RPi3
-    #os.system('vlc mp3/'+greeting[t][i]))    # PC
+    #os.system('cmdmp3win mp3/'+greeting[t][i]))    # PC
     os.system('afplay mp3/'+greeting[t][i])   # MAC
 
 # Main Program
