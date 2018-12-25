@@ -1,5 +1,6 @@
-### $pip3 install SpeechRecognition
+### $sudo apt install libportaudio0 libportaudio2 libportaudiocpp0 portaudio19-dev
 ### $pip3 install PyAudio
+### $pip3 install SpeechRecognition
 import speech_recognition as sr
 import sys
 
