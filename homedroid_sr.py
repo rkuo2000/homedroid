@@ -6,7 +6,6 @@ import sys
 from fbchat import Client
 from fbchat.models import *
 
-
 sample_rate = 48000
 chunk_size = 512
 
