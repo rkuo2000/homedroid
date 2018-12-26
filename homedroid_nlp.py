@@ -17,7 +17,7 @@ from bs4 import BeautifulSoup
 import json
 import re
 
-FB_ACCESS_TOKEN = "EAAeaXj2tnk0BAFJ7ObKVyms1PTffiFsYPH7tx9sBXjD1sEQMYJjVtGlOy2iZBQaaUoUbFnI9JLfCyZBjiCyhzoTvSJ9TRgyz5ahv0a65NZAHckQmSR3Phy4x5WEdlPzi7HRn9As7NfyQoHIuIZBzvDzZA9gTPNVLOJeJMjes7DbePFfd8v4rv"
+FB_ACCESS_TOKEN = "EAAeaXj2tnk0BAFJ7ObKVy..................."
 FB_VERIFY_TOKEN = "verify me"
 FB_GRAPH_API = 'https://graph.facebook.com/v3.2/me/messages?'
 
