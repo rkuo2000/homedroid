@@ -1,10 +1,13 @@
 #-*- coding: utf-8 -*-
 #
-# Homedroid
+# Homedroid_NLP
 #
 # Features:
-#     Echo bot using FB Messenger 
-#     homedroid.py running on RPi3/PC
+#     homedroid_nlp.py running on RPi3/PC
+#     Chatbot using FB Messenger w NLP
+#
+#     If Greetings : reply "I am homedroid"
+#     Else           echo message
 
 import os
 import requests
@@ -42,7 +45,7 @@ def messenger_post():
     if data['object'] == 'page':
         for entry in data['entry']:
             messages = entry['messaging']
-            print(messages)
+            #print(messages)
             if messages[0]:
                 sender  = messages[0]['sender']['id']
                 try:
@@ -50,8 +53,19 @@ def messenger_post():
 #-------------------Message Text-----------------------------------------------
                     try:
                         text  = message['text']
+                        #sendMessage(sender, text) # echo back
                         print(sender, text)
-                        sendMessage(sender, text) # echo back
+                        nlp   = message['nlp']
+                        #print(nlp)
+                        #print(nlp['entities']['sentiment'][0]['value'])
+                        try:
+                            greetings=nlp['entities']['greetings']
+                            greeting=nlp['entities']['greetings'][0]
+                            print(greeting['confidence'],greeting['value'])
+                            sendMessage(sender, 'I am homedroid, how may I help you?') # reply
+                        except KeyError:
+                            sendMessage(sender, text) # echo back
+                            #print('>>>KeyError=No_Greetings!')
                     except KeyError:
                         print('>>>KeyError=message-text!')
                     except KeyError:
