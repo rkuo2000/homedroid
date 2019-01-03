@@ -16,7 +16,6 @@ GPIO.setup(MotorL_pin1, GPIO.OUT)
 GPIO.setup(MotorR_pin0, GPIO.OUT)
 GPIO.setup(MotorR_pin1, GPIO.OUT)
 GPIO.setup(Sensor_Front_pin, GPIO.IN)
-GPIO.setup(Sensor_Sides_pin, GPIO.IN)
 
 # Robo functions
 def robo_stop():
