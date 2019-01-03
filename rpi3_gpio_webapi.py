@@ -66,28 +66,28 @@ def stop():
 @app.get('/forward')
 def forward():
     robo_forward()
-    time.sleep(1)
+    time.sleep(0.5)
     robo_stop()
     return "HomeRobo: move forward !"
 
 @app.get('/backward')
 def backward():
     robo_backward()
-    time.sleep(1)
+    time.sleep(0.5)
     robo_stop()
     return "HomeRobo: move backward!"
 
 @app.get('/left')
 def left():
     robo_left()
-    time.sleep(1)
+    time.sleep(0.5)
     robo_stop()
     return "HomeRobo: turn left!"
 
 @app.get('/right')
 def right():
     robo_right()
-    time.sleep(1)
+    time.sleep(0.5)
     robo_stop()
     return "HomeRobo: turn right!"
 
