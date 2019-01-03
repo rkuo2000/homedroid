@@ -8,7 +8,6 @@ MotorL_pin1 = 27
 MotorR_pin0 = 23
 MotorR_pin1 = 24
 Sensor_Front_pin = 4
-Sensor_Sides_pin = 22
 
 # GPIO setup for motor control pins
 GPIO.setmode(GPIO.BCM)
@@ -69,6 +68,5 @@ robo_stop()
 
 # read robo-sensors
 bumper_sensor  = GPIO.input(Sensor_Front_pin) 
-falling_sensor = GPIO.input(Sensor_Sides_pin) 
-print(bumper_sensor, falling_sensor)
+print(bumper_sensor)
 
