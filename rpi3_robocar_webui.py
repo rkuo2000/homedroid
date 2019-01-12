@@ -8,6 +8,8 @@ import time
 
 app = Bottle()
 
+webpage = " <!DOCTYPE html><html lang=\"en\"><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no\"/><title>{v}</title><style>.c{text-align: center;} div,input{padding:5px;font-size:1em;}  input{width:90%;}  body{text-align: center;font-family:verdana;} button{border:0;border-radius:0.6rem;background-color:#1fb3ec;color:#fdd;line-height:2.4rem;font-size:1.2rem;width:100%;} .q{float: right;width: 64px;text-align: right;} .button2 {background-color: #008CBA;} .button3 {background-color: #f44336;} .button4 {background-color: #e7e7e7; color: black;} .button5 {background-color: #555555;} .button6 {background-color: #4CAF50;} </style><script>function c(l){document.getElementById('s').value=l.innerText||l.textContent;document.getElementById('p').focus();}</script></head><body><div style='text-align:left;display:inline-block;min-width:260px'><table><tr><td></td><td><form action=\"/forward\" method=\"get\"><button class=\"button1\">Forward</button></form></td><td></td></tr><tr><td><form action=\"/left\" method=\"get\"><button class=\"button4\">Left</button></form></td><td><form action=\"/stop\" method=\"get\"><button class=\"button5\">Stop</button></form></td><td><form action=\"/right\" method=\"get\"><button class=\"button3\">Right</button></form></td></tr><tr><td></td><td><form action=\"/backward\" method=\"get\"><button class=\"button2\">Backward</button></form></td><td></td></tr></table></body></hmtl>"
+
 # define control pins of TB6612FNG
 STBY = 4
 PWMA = 13
@@ -85,6 +87,9 @@ def robo_right():
     GPIO.output(BIN2, GPIO.HIGH)
 
 # Web API
+@app.get('/')
+def root():
+    return webpage
 @app.get('/hello')
 def hello():
     return "RoboCar: Hello!!!"
@@ -92,27 +97,27 @@ def hello():
 @app.get('/stop')
 def stop():
     robo_stop()
-    return "RoboCar: Stop!"
+    return webpage
 
 @app.get('/forward')
 def forward():
     robo_forward()
-    return "RoboCar: move forward !"
+    return webpage
 
 @app.get('/backward')
 def backward():
     robo_backward()
-    return "RoboCar: move backward!"
+    return webpage
 
 @app.get('/left')
 def left():
     robo_left()
-    return "RoboCar: turn left!"
+    return webpage
 
 @app.get('/right')
 def right():
     robo_right()
-    return "RoboCar: turn right!"
+    return webpage
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080)
