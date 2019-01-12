@@ -1,7 +1,6 @@
-# Two-wheel Robo Car with Web UI
-# apache server running at port 80 for Web UI
-# /var/www/html/index.html
-# run rpi3_robocar_webui.py (at port 8080) to process commands
+# RoboCar with Web UI
+# running http server (port 8080)
+# open PC browser at http://192.168.xxx.xxx:8080 to use WebUI remote control robocar
 from bottle import Bottle, request
 import RPi.GPIO as GPIO
 import time
