@@ -19,12 +19,19 @@ sample_rate = 48000
 chunk_size = 512
 r= sr.Recognizer()
 
+count = 0
+
 def text2speech(text,tl):
+    global count
     tts=gTTS(text, lang=tl)
-    tts.save('gTTS.mp3')
-    #os.system('madplay gTTS.mp3') # RPi3
-    #os.system('cmdmp3 gTTS.mp3')     # PC
-    os.system('afplay gTTS.mp3')   # MAC
+    filename='gSTT'+str(count)+'.mp3'
+    tts.save(filename)
+    #os.system('mpg321 '+filename)  # PiZero
+    #os.system('madplay '+filename) # RPi3
+    os.system('cmdmp3 '+filename)  # PC
+    #os.system('afplay '+filename)  # MAC
+    os.remove(filename)
+    count += 1
     
 def speech2text():
     with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:

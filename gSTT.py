@@ -5,7 +5,6 @@ import urllib.request
 import sys
 import os
 import random
-from playsound import playsound
 
 sl = sys.argv[1]
 
