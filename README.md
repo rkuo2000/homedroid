@@ -15,14 +15,14 @@ fbchat_fetchid.py - list all FB friend's id <br />
 fbchat_send.py - send text, emoji, local image, remote image
 
 ## Speech 
-`python3 gTTS.py hello en` - Text-To-Speech (output gTTS.mp3)<br />
-`python3 gSR.py en` - Speech Recognition<br />
-`python3 gSTT.py en zh-TW` - Speech Translation (run once)<br />
-`python3 gTranslate.py en zh-TW` - Speech Translation (loop with greeting)<br />
+`$python3 gTTS.py hello en` - Text-To-Speech (output gTTS.mp3)<br />
+`$python3 gSR.py en` - Speech Recognition<br />
+`$python3 gSTT.py en zh-TW` - Speech Translation (run once)<br />
+`$python3 gTranslate.py en zh-TW` - Speech Translation (loop with greeting)<br />
 ### Speech with Dialogflow
-`python3 dialogflow_test.py hello en` - test Dialogflow agent<br />
-`python3 gSR_dialogflow.py en` - SR->Dialogflow<br />
-`python3 gSTT_dialogflow.py en` - SR->Dialogflow->TTS (run once)<br />
+`$python3 dialogflow_test.py hello en` - test Dialogflow agent<br />
+`$python3 gSR_dialogflow.py en` - SR->Dialogflow<br />
+`$python3 gSTT_dialogflow.py en` - SR->Dialogflow->TTS (run once)<br />
 
 ## parse KML (Google Earth pro as Mission Planner)
-`python3 parse_kml.py test.kml`
+`$python3 parse_kml.py test.kml`
