@@ -1,6 +1,5 @@
-### $sudo apt install libportaudio0 libportaudio2 libportaudiocpp0 portaudio19-dev
-### $pip3 install PyAudio
 ### $pip3 install SpeechRecognition
+### $pip3 install PyAudio
 import speech_recognition as sr
 import sys
 
@@ -11,7 +10,7 @@ sl = sys.argv[1]
 r= sr.Recognizer()
 
 with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
-    r.adjust_for_ambient_noise(source)
+#    r.adjust_for_ambient_noise(source)
     print("Speak:")
     audio = r.listen(source)
     print("Processing...")

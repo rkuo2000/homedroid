@@ -5,6 +5,7 @@ import urllib.request
 import sys
 import os
 import random
+from playsound import playsound
 
 #sl = 'en' # source language
 #tl = 'fr' # target language
@@ -18,11 +19,9 @@ r= sr.Recognizer()
 def text2speech(text,tl):
     tts=gTTS(text, lang=tl)
     tts.save('gTTS.mp3')
-    #os.system('mpg321 gTTS.mp3') # PiZero
-    #os.system('madplay gTTS.mp3') # RPi3
-    os.system('cmdmp3 gTTS.mp3')     # PC
-    #os.system('afplay gTTS.mp3')   # MAC   
-    
+    playsound('gTTS.mp3')
+    os.remove('gTTS.mp3')
+   
 def speech2text():
     with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
         r.adjust_for_ambient_noise(source)
