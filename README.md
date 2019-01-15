@@ -17,8 +17,8 @@ fbchat_send.py - send text, emoji, local image, remote image
 ## Speech 
 `$python3 gTTS.py hello en` - Text to Speech (output gTTS.mp3)<br />
 `$python3 gSR.py en` - Speech to Text<br />
-`$python3 gSTS.py en` - Speech to Text then Text to Speech<br />
-`$python3 gSTT.py en fr` - Speech Translation<br />
+`$python3 gSTT.py en` - Speech to Text then Text to Speech<br />
+`$python3 gSTS.py en fr` - Speech Translation<br />
 ### Speech with Dialogflow
 `$python3 dialogflow_test.py hello en` - test Dialogflow agent<br />
 `$python3 dialogflow_gSR.py en` - Dialogflow with SR<br />
