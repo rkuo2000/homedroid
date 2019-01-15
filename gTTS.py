@@ -1,16 +1,13 @@
 ### $pip3 install gTTS
-## $python3 gTTS.py en hello
+### $pip3 install playsound
+### $python gTTS.py hello en
 from gtts import gTTS
-import os
+from playsound import playsound
 import sys
 
-sl = sys.argv[1]
-text = sys.argv[2]
+text = sys.argv[1]
+sl = sys.argv[2]
 
-tts = gTTS(text, lang=sl)
+tts = gTTS(text,lang=sl)
 tts.save('gTTS.mp3')
-
-#os.system('mpg321 gTTS.mp3') # PiZero
-#os.system('madplay gTTS.mp3') # RPi3
-os.system('cmdmp3 gTTS.mp3')     # PC
-#os.system('afplay gTTS.mp3')   # MAC
+playsound('gTTS.mp3')
