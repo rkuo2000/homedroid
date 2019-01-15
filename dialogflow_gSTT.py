@@ -18,15 +18,19 @@ chunk_size = 512
 sl = sys.argv[1]
 r= sr.Recognizer()
 
+count = 0
+
 # defines for Dialogflow
 PROJECT_ID = "homedroid-228703"
 random.seed(0x228703)
 
 def text2speech(text,tl):
+    global count
     tts=gTTS(text, lang=tl)
-    tts.save('gTTS.mp3')
-    playsound('gTTS.mp3')
-    os.remove('gTTS.mp3')
+    tts.save('gSTT'+str(count)+'.mp3')
+    playsound('gSTT'+str(count)+'.mp3')
+    os.remove('gSTT'+str(count)+'.mp3')
+    count +=1
 
 # Dialogflow detect intent
 def detect_intent_text(project_id, session_id, text, language_code):

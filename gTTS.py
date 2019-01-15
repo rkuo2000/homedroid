@@ -12,3 +12,4 @@ sl = sys.argv[2]
 tts = gTTS(text,lang=sl)
 tts.save('gTTS.mp3')
 playsound('gTTS.mp3')
+os.remove('gTTS.mp3')
