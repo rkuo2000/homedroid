@@ -18,9 +18,13 @@ count = 0
 def text2speech(text,tl):
     global count
     tts=gTTS(text, lang=tl)
-    tts.save('gSTT'+str(count)+'.mp3')
-    playsound('gSTT'+str(count)+'.mp3')
-    os.remove('gSTT'+str(count)+'.mp3')
+    filename='gSTT'+str(count)+'.mp3'
+    tts.save(filename)
+    #os.system('mpg321 '+filename)  # PiZero
+    #os.system('madplay '+filename) # RPi3
+    os.system('cmdmp3 '+filename)  # PC
+    #os.system('afplay '+filename)  # MAC
+    os.remove(filename)
     count += 1
     
 def speech2text():
