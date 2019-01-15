@@ -4,6 +4,7 @@
 from gtts import gTTS
 from playsound import playsound
 import sys
+import os
 
 text = sys.argv[1]
 sl = sys.argv[2]
@@ -11,3 +12,4 @@ sl = sys.argv[2]
 tts = gTTS(text,lang=sl)
 tts.save('gTTS.mp3')
 playsound('gTTS.mp3')
+os.remove('gTTS.mp3')
