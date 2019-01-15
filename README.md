@@ -19,7 +19,8 @@ fbchat_send.py - send text, emoji, local image, remote image
 `python3 gSR.py en` - Speech Recognition<br />
 `python3 gSTT.py en zh-TW` - Speech Translation (run once)<br />
 `python3 gTranslate.py en zh-TW` - Speech Translation (loop with greeting)<br />
-### Dialogflow
+### Speech with Dialogflow
+`python3 dialogflow_test.py hello en` - test Dialogflow agent<br />
 `python3 gSR_dialogflow.py en` - SR->Dialogflow<br />
 `python3 gSTT_dialogflow.py en` - SR->Dialogflow->TTS (run once)<br />
 
