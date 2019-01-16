@@ -32,9 +32,9 @@ def text2speech(text,tl):
     count += 1
     
 def speech2text():
-    print("Speak:")
     with microphone as source:
         recognizer.adjust_for_ambient_noise(source)
+        print("Speak:")
         audio = recognizer.listen(source)
         try:
             text = recognizer.recognize_google(audio, language=sl)
