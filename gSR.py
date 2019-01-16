@@ -4,7 +4,7 @@ import speech_recognition as sr
 import sys
 
 sl = sys.argv[1]
-recongizer = sr.Recognizer()
+recognizer = sr.Recognizer()
 microphone = sr.Microphone()
 
 while True:
