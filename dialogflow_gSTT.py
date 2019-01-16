@@ -10,7 +10,8 @@ import random
 
 sl = sys.argv[1]
 
-r= sr.Recognizer()
+recognizer = sr.Recognizer()
+microphone = sr.Microphone()
 count = 0
 
 # defines for Dialogflow
@@ -33,11 +34,11 @@ def detect_intent_text(project_id, session_id, text, language_code):
 
 def speech2text():
     print("Speak:")
-    with sr.Microphone() as source:
-        r.adjust_for_ambient_noise(source)
-        audio = r.listen(source)
+    with microphone as source:
+        recognizer.adjust_for_ambient_noise(source)
+        audio = recognizer.listen(source)
         try:
-            text = r.recognize_google(audio, language=sl)
+            text = recognizer.recognize_google(audio, language=sl)
             print("You said:", text)
             return text
         except sr.UnknownValueError:
