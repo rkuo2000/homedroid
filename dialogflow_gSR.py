@@ -6,10 +6,6 @@ import dialogflow_v2 as dialogflow
 import sys
 import random
 
-# defines for SpeechRecognition
-sample_rate = 48000
-chunk_size = 512
-
 sl = sys.argv[1]
 r= sr.Recognizer()
 
@@ -29,18 +25,23 @@ def detect_intent_text(project_id, session_id, text, language_code):
     print('Detected intent: {} (confidence: {})\n'.format(response.query_result.intent.display_name, response.query_result.intent_detection_confidence))
     print('Fulfillment text: {}\n'.format(response.query_result.fulfillment_text))
 
-with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
-    r.adjust_for_ambient_noise(source)
-    while True:
-        print("Speak:")
+def speech2text():
+    print("Speak:")
+    with sr.Microphone() as source:
+        r.adjust_for_ambient_noise(source)
         audio = r.listen(source)
-        print("Recognizing...")
         try:
             text = r.recognize_google(audio, language=sl)
             print("You said:", text)
-            session_id = str(random.random())[2:]
-            detect_intent_text(PROJECT_ID, session_id, text, sl)
+            return text
         except sr.UnknownValueError:
             print("Could not understand audio!")
         except sr.RequestError as e:
             print("Could not request results; {0}".format(e))
+			
+if __name__ == "__main__":
+    while True:
+        text  = speech2text()
+        session_id = str(random.random())[2:]
+        detect_intent_text(PROJECT_ID, session_id, text, sl)
+        print("--------------------------------------------")
