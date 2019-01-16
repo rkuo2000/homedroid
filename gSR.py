@@ -7,10 +7,10 @@ sl = sys.argv[1]
 recognizer = sr.Recognizer()
 microphone = sr.Microphone()
 
-while True:
-    print("Speak:")	
+while True:	
     with microphone as source:
-        recognizer.adjust_for_ambient_noise(source)	
+        recognizer.adjust_for_ambient_noise(source)
+        print("Speak:")
         audio = recognizer.listen(source)
         try:
             text = recognizer.recognize_google(audio, language=sl)
