@@ -15,10 +15,7 @@ tl = sys.argv[2]
 fb_account = sys.argv[3] # 'your_email'
 fb_passwd =  sys.argv[4] # 'your_passwd'
 
-sample_rate = 48000
-chunk_size = 512
 r= sr.Recognizer()
-
 count = 0
 
 def text2speech(text,tl):
@@ -26,22 +23,21 @@ def text2speech(text,tl):
     tts=gTTS(text, lang=tl)
     filename='gSTT'+str(count)+'.mp3'
     tts.save(filename)
-    #os.system('mpg321 '+filename) # RPi3
+    #os.system('mpg321 '+filename)  # PiZero
+    #os.system('madplay '+filename) # RPi3
     os.system('cmdmp3 '+filename)  # PC
     #os.system('afplay '+filename)  # MAC
     os.remove(filename)
     count += 1
     
 def speech2text():
-    with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
-        print("Canceling ambient noise.....")
-#        r.adjust_for_ambient_noise(source)
-        print("Speak:")
+    print("Speak:")
+    with sr.Microphone() as source:
+        r.adjust_for_ambient_noise(source)
         audio = r.listen(source)
-        print("Processing.....")
         try:
             text = r.recognize_google(audio, language=sl)
-            print("You said  :", text)		
+            print("You said:", text)
             return text
         except sr.UnknownValueError:
             print("Could not understand audio!")
@@ -65,25 +61,18 @@ def translate(text,sl,tl):
 def fb_send(text):
     client.send(Message(text=text),thread_id=client.uid, thread_type=ThreadType.USER)    
 
-def greet(t):
-    i = random.randint(0,len(greeting[t])-1)
-    #os.system('madplay mp3/'+greeting[t][i]) # RPi3
-    #os.system('cmdmp3win mp3/'+greeting[t][i]))    # PC
-    os.system('afplay mp3/'+greeting[t][i])   # MAC
-
-# Main Program
-client = Client(fb_account, fb_passwd)
-print("--------------------------------------")
-
-while True:
-    # Speech to Text
-    text  = speech2text()
-    fb_send(text)
-    if text is not None:
-        ttext = translate(text,sl,tl)
-        fb_send(ttext)
-        text2speech(ttext,tl)
-    if text=="have a good day":
-        break
+if __name__ == "__main__":
+    client = Client(fb_account, fb_passwd)
     print("--------------------------------------")
+
+    while True:
+        text  = speech2text()
+        fb_send(text)
+        if text is not None:
+            ttext = translate(text,sl,tl)
+            fb_send(ttext)
+            text2speech(ttext,tl)
+        if text=="have a good day":
+            break
+        print("--------------------------------------")
 client.logout()

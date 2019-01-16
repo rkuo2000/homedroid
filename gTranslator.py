@@ -11,10 +11,7 @@ import random
 sl = sys.argv[1]
 tl = sys.argv[2]
 
-sample_rate = 48000
-chunk_size = 256
 r= sr.Recognizer()
-
 count = 0
 
 def text2speech(text,tl):
@@ -22,7 +19,8 @@ def text2speech(text,tl):
     tts=gTTS(text, lang=tl)
     filename='gSTT'+str(count)+'.mp3'
     tts.save(filename)
-    #os.system('mpg321 '+filename) # RPi3
+    #os.system('mpg321 '+filename)  # PiZero
+    #os.system('madplay '+filename) # RPi3
     os.system('cmdmp3 '+filename)  # PC
     #os.system('afplay '+filename)  # MAC
     os.remove(filename)
@@ -30,16 +28,17 @@ def text2speech(text,tl):
     
 def speech2text():
     print("Speak:")
-    audio = r.listen(source)
-    print("Processing.....")
-    try:
-        text = r.recognize_google(audio, language=sl)
-        print("You said  :", text)		
-        return text
-    except sr.UnknownValueError:
-        print("Could not understand audio!")
-    except sr.RequestError as e:
-        print("Could not request results; {0}".format(e))
+    with sr.Microphone() as source:
+        r.adjust_for_ambient_noise(source)
+        audio = r.listen(source)
+        try:
+            text = r.recognize_google(audio, language=sl)
+            print("You said:", text)
+            return text
+        except sr.UnknownValueError:
+            print("Could not understand audio!")
+        except sr.RequestError as e:
+            print("Could not request results; {0}".format(e))
 
 def translate(text,sl,tl):
     btext = text.encode('utf-8')
@@ -55,15 +54,12 @@ def translate(text,sl,tl):
     print("Translated:", result)
     return result  
 
-# Main Program
-with sr.Microphone(sample_rate=sample_rate, chunk_size=chunk_size) as source:
-    print("Canceling ambient noise.....")
-    r.adjust_for_ambient_noise(source)
+if __name__ == "__main__":
     while True:
         text  = speech2text()
         if text is not None:
             ttext = translate(text,sl,tl)
-        text2speech(ttext,tl)
+            text2speech(ttext,tl)
         if text=="have a good day":
             break
         print("--------------------------------------")
