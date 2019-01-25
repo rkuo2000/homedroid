@@ -1,9 +1,10 @@
 # Homebot sample codes
 
 ## rpi3 
-rpi3_robocar_gpio.py - RPi3 GPIO control a robot car <br />
-rpi3_robocar_webui.py - rPi3 WebUI to control a robot car <br />
-rpi3_i2c_VL53L0X.py   - rPi3 I2C to read VL53L0X IR ranger <br />
+rpi3_robocar_gpio.py  - RPi3 GPIO control a robot car <br />
+rpi3_robocar_webui.py - RPi3 WebUI to control a robot car <br />
+rpi3_i2c_HTU21DF.py   - RPi3 read HTU21DF temperature and humidity <br />
+rpi3_i2c_VL53L0X.py   - RPi3 I2C to read VL53L0X IR ranger <br />
 
 ## fbchat (for FB Messenger)
 fbchat_basic.py - login FB to find owner uid <br />
