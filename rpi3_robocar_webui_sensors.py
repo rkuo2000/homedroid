@@ -1,6 +1,7 @@
-# RoboCar with Web UI
+# RoboCar with Sensors 
 # running http server (port 8080)
 # open PC browser at http://192.168.xxx.xxx:8080 to use WebUI remote control robocar
+import os
 from bottle import Bottle, request
 import RPi.GPIO as GPIO
 import time
@@ -11,6 +12,8 @@ import VL53L0X
 app = Bottle()
 
 mlx = MLX90614.MLX90614()
+
+os.system("sudo pigpiod")
 
 webpage = " <!DOCTYPE html><html lang=\"en\"><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no\"/><title>RoboCar</title><style>.c{text-align: center;} div,input{padding:5px;font-size:1em;}  input{width:90%;}  body{text-align: center;font-family:verdana;} button{border:0;border-radius:0.6rem;background-color:#3b5998;color:#fdd;line-height:2.4rem;font-size:1.2rem;width:100%;} .q{float: right;width: 64px;text-align: right;}  </style><script>function c(l){document.getElementById('s').value=l.innerText||l.textContent;document.getElementById('p').focus();}</script></head><body><div style='text-align:left;display:inline-block;min-width:260px'><table><caption>RoboCar</caption><tr><td></td><td><form action=\"/forward\" method=\"get\"><button style='width: 80px; height: 60px; font-size: 10px' class=\"button1\">Forward </button></form></td><td></td></tr><tr><td><form action=\"/left\" method=\"get\"><button style='width: 80px; height: 60px; font-size: 10px' class=\"button4\">  Left  </button></form></td><td><form action=\"/stop\" method=\"get\"><button style='width: 80px; height: 60px; font-size: 10px' class=\"button5\">  Stop  </button></form></td><td><form action=\"/right\" method=\"get\"><button style='width: 80px; height: 60px; font-size: 10px' class=\"button3\"> Right  </button></form></td></tr><tr><td></td><td><form action=\"/backward\" method=\"get\"><button style='width: 80px; height: 60px; font-size: 10px' class=\"button2\">Backward</button></form></td><td></td></tr></table></body><table></hmtl>"
 
