@@ -24,8 +24,7 @@ def text2speech(text,tl):
     tts=gTTS(text, lang=tl)
     filename='gSTT'+str(count)+'.mp3'
     tts.save(filename)
-    #os.system('mpg321 '+filename)  # PiZero
-    #os.system('madplay '+filename) # RPi3
+    #os.system('mpg321 '+filename)  # RPi3
     os.system('cmdmp3 '+filename)  # PC
     #os.system('afplay '+filename)  # MAC
     os.remove(filename)
