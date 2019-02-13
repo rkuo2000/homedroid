@@ -40,7 +40,7 @@ def robo_stop():
     pwmA.stop()
     GPIO.output(AIN1,GPIO.LOW)
     GPIO.output(AIN2,GPIO.LOW)
-    pwmA.stop()
+    pwmB.stop()
     GPIO.output(BIN1,GPIO.LOW)
     GPIO.output(BIN2,GPIO.LOW)
 
