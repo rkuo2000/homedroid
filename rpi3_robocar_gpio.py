@@ -1,5 +1,4 @@
 # Two-wheel Robo Car : GPIO control test
-from bottle import Bottle, request
 import RPi.GPIO as GPIO
 import time
 import sys
