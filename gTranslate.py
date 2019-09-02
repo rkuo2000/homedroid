@@ -1,3 +1,4 @@
+### Usage: python gTranslate.py en fr
 import random
 import json
 import sys
@@ -8,19 +9,16 @@ import urllib.request
 
 sl = sys.argv[1]
 tl = sys.argv[2]
-count = 0
 
 def text2speech(text,tl):
-    global count
     tts=gTTS(text, lang=tl)
-    filename='gSTT'+str(count)+'.mp3'
+    filename='gSTT.mp3'
     tts.save(filename)
     #os.system('mpg321 '+filename)  # PiZero
     #os.system('madplay '+filename) # RPi3
     os.system('cmdmp3 '+filename)  # PC
     #os.system('afplay '+filename)  # MAC
     os.remove(filename)
-    count += 1
 
 def translate(text,sl,tl):
     btext = text.encode('utf-8')
@@ -37,12 +35,11 @@ def translate(text,sl,tl):
     return result
 	
 def chat():
-    print("Start talking with the bot (type quit to stop)!")
+    print("Start talking with the bot (type exit to stop)!")
     while True:
         text = input("Input: ")
-        if text.lower() == "quit":
+        if text.lower() == "exit":
             break
-        
         ttext = translate(text,sl,tl)
         text2speech(ttext,tl)
 
