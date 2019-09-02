@@ -1,5 +1,5 @@
 ### $pip3 install gTTS
-### Usage: $python gTTS.py hello en
+### Usage: python gTTS.py hello en
 from gtts import gTTS
 import sys
 import os
