@@ -1,6 +1,5 @@
 ### $pip3 install gTTS
-### $pip3 install playsound
-### $python gTTS.py hello en
+### Usage: $python gTTS.py hello en
 from gtts import gTTS
 import sys
 import os
