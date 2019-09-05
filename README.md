@@ -1,7 +1,7 @@
 # Homebot sample codes
 
 ## rpi3 
-rpi3_alexa_gpio.py    - *RPi3 as Alexa app with GPIO control*<br />
+**rpi3_alexa_gpio.py**    - *RPi3 as Alexa app with GPIO control*<br />
 rpi3_i2c_HTU21DF.py   - *RPi3 I2C to read HTU21DF temperature and humidity* <br />
 rpi3_i2c_MLX90614.py  - *RPi3 I2C to read MLX90614 IR ranger* <br />
 rpi3_i2c_VL53L0X.py   - *RPi3 I2C to read VL53L0X IR ranger* <br />
