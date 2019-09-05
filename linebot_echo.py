@@ -1,6 +1,7 @@
 ### git clone https://github.com/line/line-bot-sdk-python
 ### cd line-bot-sdk-python
-### cp ~/homebot/linebot_echo.python
+### cp ~/homebot/linebot_echo.py .
+### (edit LINE_CHANNEL_ACCESS_TOKEN & LINE_CHANNEL_SECRET)
 ### python linebot_echo.py
 from __future__ import unicode_literals
 
@@ -21,8 +22,8 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('oty2ZNajxlkih7UI0L1vIA3pka0MX8wLphpRKampiW+DD7JWc4RH6leJvtzY90iLRsqksQYZVgH49ri6+mbXi/GeSr8xlIX/VR6MrXcMXdh+NqSU9o4F+EhNsooCfGyE+MiCyhUyslw+1p34hF1hkAdB04t89/1O/w1cDnyilFU=')
-parser = WebhookParser('9306e7560eb7c41dee2f443677d5c863')
+line_bot_api = LineBotApi('LINE_CHANNEL_ACCESS_TOKEN')
+parser = WebhookParser('LINE_CHANNEL_SECRET')
 
 @app.route("/callback", methods=['POST'])
 def callback():
