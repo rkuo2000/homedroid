@@ -29,8 +29,8 @@ from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import (MessageEvent, TextMessage, TextSendMessage)
 
 app = Flask(__name__)
-line_bot_api = LineBotApi('oty2ZNajxlkih7UI0L1vIA3pka0MX8wLphpRKampiW+DD7JWc4RH6leJvtzY90iLRsqksQYZVgH49ri6+mbXi/GeSr8xlIX/VR6MrXcMXdh+NqSU9o4F+EhNsooCfGyE+MiCyhUyslw+1p34hF1hkAdB04t89/1O/w1cDnyilFU=')
-parser = WebhookParser('9306e7560eb7c41dee2f443677d5c863')
+line_bot_api = LineBotApi('LINE_CHANNEL_ACCESS_TOKEN')
+parser = WebhookParser('LINE_CHANNEL_SECRET')
 
 ## for GPU
 config=tf.ConfigProto(allow_soft_placement=True)
