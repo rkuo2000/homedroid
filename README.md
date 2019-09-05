@@ -9,7 +9,6 @@ rpi3_robocar_gpio.py  - *RPi3 GPIO control a robot car* <br />
 rpi3_robocar_webui.py - *RPi3 WebUI to control a robot car* <br />
 rpi3_robocar_webui_sensors.py - *RPi3 WebUI to read sensors on a robot car* <br />
 rpi3_uart.py          - *RPi3 uart in python*<br />
-
 ## fbchat (for FB Messenger)
 fbchat_basic.py - *login FB to find owner uid* <br />
 fbchat_echobot.py - *messenger auto echo to message* <br />
@@ -25,7 +24,7 @@ messengerbot_echo.py - *Echobot for Messenger* <br />
 `$python3 gSR.py en` - *Speech to Text*<br />
 `$python3 gSTT.py en` - *Speech to Text then Text to Speech*<br />
 `$python3 gTranslator.py en fr` - *Speech Translation*<br />
-### Speech with Dialogflow
+### Dialogflow
 `$python3 dialogflow_test.py hello en` - *test Dialogflow agent*<br />
 `$python3 dialogflow_gSR.py en` - *Dialogflow with SR*<br />
 `$python3 dialogflow_gSTT.py en` - *Dialogflow with SR & TTS*<br />
