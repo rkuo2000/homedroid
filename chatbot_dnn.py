@@ -85,7 +85,7 @@ model.compile(optimizer='Adam',loss='categorical_crossentropy', metrics=['accura
 model.summary()
 # Train Model
 model.fit(training, output, epochs=200, batch_size=8, verbose=1)
-model.save('model/chatbot_dnn.h5')
+model.save('chatbot_dnn.h5')
 
 def bag_of_words(s, words):
     bag = [0 for _ in range(len(words))]
