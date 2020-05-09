@@ -9,8 +9,8 @@ import pandas as pd
 # parameters
 # -------------------------------------------------------------------------
 
-Fs = 10 # IMU sample rate
-filePath = 'mpu9250_1.csv'
+Fs = 70 # IMU sample rate
+filePath = 'mpu9250_2.csv'
 beginTime  = 2  # the beginning of time to process data 
 endTime    = 26 # the end of time to process data
 stopPeriod = 3  # keep still 3 seconds to average acc magnitude
@@ -26,9 +26,9 @@ time = dataset.iloc[:,0].values * samplePeriod
 accX = dataset.iloc[:,1].values
 accY = dataset.iloc[:,2].values
 accZ = dataset.iloc[:,3].values
-gyrX = dataset.iloc[:,4].values
-gyrY = dataset.iloc[:,5].values
-gyrZ = dataset.iloc[:,6].values
+gyroX= dataset.iloc[:,4].values
+gyroY= dataset.iloc[:,5].values
+gyroZ= dataset.iloc[:,6].values
 magX = dataset.iloc[:,7].values
 magY = dataset.iloc[:,8].values
 magZ = dataset.iloc[:,9].values
@@ -45,9 +45,9 @@ indexSel2 = time < endTime
 indexSel = indexSel1 * indexSel2
 
 time = time[indexSel]
-gyrX = gyrX[indexSel]
-gyrY = gyrY[indexSel]
-gyrZ = gyrZ[indexSel]
+gyroX= gyroX[indexSel]
+gyroY= gyroY[indexSel]
+gyroZ= gyroZ[indexSel]
 accX = accX[indexSel]
 accY = accY[indexSel]
 accZ = accZ[indexSel]
@@ -102,9 +102,9 @@ plt.figure(figsize=(20,10))
 plt.suptitle('Sensor Data', fontsize=14)
 ax1 = plt.subplot(2+mag_enabled,1,1)
 plt.grid()
-plt.plot(time, gyrX, 'r')
-plt.plot(time, gyrY, 'g')
-plt.plot(time, gyrZ, 'b')
+plt.plot(time, gyroX, 'r')
+plt.plot(time, gyroY, 'g')
+plt.plot(time, gyroZ, 'b')
 plt.title('Gyroscope')
 plt.ylabel('Angular velocity (º/s)')
 plt.legend(labels=['X', 'Y', 'Z'])
@@ -143,42 +143,76 @@ plt.xlabel('Time (s)')
 #quat = quats
 
 #-------------------------------------------------------------------------
-# get acceleration raw data
-#-------------------------------------------------------------------------
+# acceleration raw data
 acc = []
 [acc.append([accX[i], accY[i], accZ[i]]) for i in range(len(accX))]
 acc = np.array(acc)
 
 # Convert acceleration to m/s^2 (1g = 9.81 m/s^2)
 acc = acc * 9.81
+acc[:,2] = acc[:,2] - 9.81
 
-# Plot translational accelerations
+
+
+#-------------------------------------------------------------------------
+# gyroscope raw data
+gyro = []
+[gyro.append([gyroX[i], gyroY[i], gyroZ[i]]) for i in range(len(gyroX))]
+gyro = np.array(gyro)
+
+#-------------------------------------------------------------------------
+# deltaT
+deltaT = np.zeros(np.shape(acc))
+for t in range(1,len(deltaT)):
+    deltaT[t] = time[t]-time[t-1]
+#-------------------------------------------------------------------------
+# Kalman filter
+#-------------------------------------------------------------------------
+kalman = np.zeros(np.shape(acc))
+Q=0.1;   
+R=5;     
+P00=0.1; 
+P11=0.1; 
+P01=0.1; 
+
+for t in range(1,len(kalman)):	
+    kalman[t,:] = kalman[t-1,:] - gyro[t,:] * deltaT[t]; # Kalman pitch
+	
+    P00 += deltaT[t] * (2 * P01 + deltaT[t] * P11); 
+    P01 += deltaT[t] * P11; 
+    P00 += deltaT[t] * Q;
+    P11 += deltaT[t] * Q;
+	
+    Kk0 = P00 / (P00 + R);
+    Kk1 = P01 / (P01 + R); 
+	
+    kalman[t,:] += (acc[t,:] - kalman[t-1,:]) * Kk0
+	
+    P00 *= (1 - Kk0);
+    P01 *= (1 - Kk1);
+    P11 -= Kk1 * P01;
+
+# Plot filtered accelerations
 plt.figure(figsize=(20,10))
 plt.suptitle('Accelerations', fontsize=14)
 plt.grid()
 
-plt.plot(time, acc[:,0], 'r')
-plt.plot(time, acc[:,1], 'g')
-plt.plot(time, acc[:,2], 'b')
-plt.title('Acceleration')
+plt.plot(time, kalman[:,0], 'r')
+plt.plot(time, kalman[:,1], 'g')
+plt.plot(time, kalman[:,2], 'b')
+plt.title('Kalman Acc')
 plt.xlabel('Time (s)')
 plt.ylabel('Acceleration (m/s/s)')
 plt.legend(('X', 'Y', 'Z'))
 
-
-# -------------------------------------------------------------------------
-# Compute translational velocities
-
-acc[:,2] = acc[:,2] - 9.81
-
+#-------------------------------------------------------------------------
 # Integrate acceleration to yield velocity
 vel = np.zeros(np.shape(acc))
-deltaT = np.zeros(np.shape(acc))
-for t in range(1,len(deltaT)):
-    deltaT[t] = time[t]-time[t-1]
+
 
 for t in range(1,len(vel)):
     vel[t,:] = vel[t-1,:] + acc[t,:] * deltaT[t]
+#    vel[t,:] = vel[t-1,:] + kalman[t,:] * deltaT[t]
     if stationary[t]:
         vel[t,:] = np.zeros((3))    # force zero velocity when foot stationary  
 
