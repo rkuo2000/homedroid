@@ -19,6 +19,8 @@ fbchat_send.py - *send text, emoji, local image, remote image* <br />
 **linebot_echo.py** - *Echobot for Line* <br />
 **messengerbot_chat.py** - *Chatbot for Messenger* <br />
 **messengerbot_echo.py** - *Echobot for Messenger* <br />
+**chatbot_client.py** - *Chatbot client* <br />
+**chatbot_server.py** - *Chatbot server (also support Chatbot_UI.aia)* <br />
 ## Speech 
 `$python3 gTTS.py hello en` - *Text to Speech (output gTTS.mp3)*<br />
 `$python3 gSR.py en` - *Speech to Text*<br />
